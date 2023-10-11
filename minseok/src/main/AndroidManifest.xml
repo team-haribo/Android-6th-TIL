@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <application>
+        <activity
+            android:name=".2-minseok-Box-Column-Row.ColumnActivity"
+            android:exported="false"
+            android:label="@string/title_activity_column"
+            android:theme="@style/Theme.Android6thTIL" />
+        <activity
+            android:name=".2-minseok-Box-Column-Row.BoxActivity"
+            android:exported="false"
+            android:label="@string/title_activity_box"
+            android:theme="@style/Theme.Android6thTIL" />
+        <activity
+            android:name=".2-minseok-Box-Column-Row.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Android6thTIL" />
+    </application>
+
 </manifest>
