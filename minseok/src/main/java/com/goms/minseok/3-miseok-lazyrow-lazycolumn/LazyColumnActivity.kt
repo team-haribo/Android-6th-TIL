@@ -3,6 +3,7 @@ package com.goms.minseok.`3-miseok-lazyrow-lazycolumn`
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -13,11 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +27,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Android6thTILTheme {
-                LazyColumnExam()
+                StickyHeaderLazyColumn()
             }
         }
     }
@@ -52,14 +50,66 @@ fun LazyColumnExam() {
             WordBox(num = index, data = itemsIndexedList[index])
         }
     }
-
 }
+data class Item(val category: Char, val index: Int)
+
+val data = ('A'..'E').flatMap { char ->
+    (0 .. 5).map { index ->
+        Item(char, index)
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun StickyHeaderLazyColumn() {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
+        data.forEach { item ->
+            stickyHeader {
+                if(item.index == 0){
+                    StickyBox(num = -1, data = item.category.toString())
+                }
+            }
+            item {
+                StickyBox(num = item.index, data = item.category.toString())
+            }
+        }
+    }
+}
+
+
+
+@Composable
+fun StickyBox(num: Int, data: String) {
+    Card(
+        modifier = Modifier
+            .padding(10.dp)
+            .border(width = 4.dp, color = Color.Black)
+            .fillMaxWidth()
+            .height(100.dp)
+    ) {
+        Box(modifier = Modifier.padding(10.dp)) {
+            if(num != -1) {
+                Text("$data-$num")
+            }else{
+                Text("$data", modifier = Modifier.background(Color.Red))
+            }
+        }
+    }
+}
+
+
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview5() {
     Android6thTILTheme {
-        LazyColumnExam()
+        //LazyColumnExam()
+        StickyHeaderLazyColumn()
     }
 }
 @Composable
