@@ -51,12 +51,13 @@ fun LazyColumnExam() {
         }
     }
 }
-data class Item(val category: Char, val index: Int)
+data class Item(val category: Char, val number: Int)
 
 val data = ('A'..'E').flatMap { char ->
     (0 .. 5).map { index ->
         Item(char, index)
-    }
+    }//item(a,0) item(a,1) item(a,2) item(a,3) item(a,4)
+     //item(b,0) ...
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -67,14 +68,14 @@ fun StickyHeaderLazyColumn() {
             .fillMaxSize()
             .background(Color.White)
     ) {
-        data.forEach { item ->
-            stickyHeader {
-                if(item.index == 0){
+        data.forEachIndexed { index,item ->
+            if(item.number == 0) {
+                stickyHeader {
                     StickyBox(num = -1, data = item.category.toString())
                 }
             }
             item {
-                StickyBox(num = item.index, data = item.category.toString())
+                StickyBox(num = item.number, data = item.category.toString())
             }
         }
     }
