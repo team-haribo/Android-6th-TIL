@@ -64,6 +64,12 @@ fun LazyRow(
 LazyRow(
     modifier = Modifier.fillMaxWidth(),
     content = {
+        stickyHeader {
+            Text(
+                text = "StickyHeader",
+                color = Color.Red
+            )
+        }
         items(100) { index ->
             Text(text = "item : $index")
         }
@@ -71,6 +77,7 @@ LazyRow(
 )
 ```
 - 화면의 전체 크기를 차지하는 `LazyRow` 를 생성한다.
+- stickyHeader 함수를 사용하여 스크롤이 되도 "StickyHeader"는 시작점(왼쪽)에 고정된다.
 - items 함수를 사용하여 100개의 항목을 동적으로 생성한다. 
 
 ### 실행화면
