@@ -3,6 +3,16 @@
 
     <application>
         <activity
+            android:name=".3-miseok-lazyrow-lazycolumn.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Android6thTIL" />
+        <activity
+            android:name=".3-miseok-lazyrow-lazycolumn.LazyrowActivity"
+            android:exported="false"
+            android:label="@string/title_activity_lazyrow"
+            android:theme="@style/Theme.Android6thTIL" />
+        <activity
             android:name=".2-minseok-Box-Column-Row.ColumnActivity"
             android:exported="false"
             android:label="@string/title_activity_column"
