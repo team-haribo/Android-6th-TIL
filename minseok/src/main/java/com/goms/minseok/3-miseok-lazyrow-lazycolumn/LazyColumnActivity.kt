@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.goms.minseok.ui.theme.Android6thTILTheme
 
-class MainActivity : ComponentActivity() {
+class LazyColumnActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -75,7 +75,9 @@ fun StickyHeaderLazyColumn() {
                 }
             }
             item {
-                StickyBox(num = item.number, data = item.category.toString())
+                if(item.number != 0) {
+                    StickyBox(num = item.number, data = item.category.toString())
+                }
             }
         }
     }
