@@ -3,6 +3,16 @@
 
     <application>
         <activity
+            android:name=".4-minseok-card-textfield.CardActivity"
+            android:exported="false"
+            android:label="@string/title_activity_card"
+            android:theme="@style/Theme.Android6thTIL" />
+        <activity
+            android:name=".4-minseok-card-textfield.TextFieldActivity"
+            android:exported="false"
+            android:label="@string/title_activity_text_field"
+            android:theme="@style/Theme.Android6thTIL" />
+        <activity
             android:name=".3-miseok-lazyrow-lazycolumn.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
