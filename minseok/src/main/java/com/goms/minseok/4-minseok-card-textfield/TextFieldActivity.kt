@@ -37,7 +37,7 @@ class TextFieldActivity : ComponentActivity() {
 @Composable
 fun TextFieldExam() {
     var data by remember {
-        mutableStateOf("Hellow") //ㄹ
+        mutableStateOf("Hellow")
     }
     Column(modifier = Modifier.background(Color.White)) {
         TextField(value = "Hello", onValueChange = {})
