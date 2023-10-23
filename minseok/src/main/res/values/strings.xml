@@ -5,4 +5,5 @@
     <string name="title_activity_lazyrow">LazyrowActivity</string>
     <string name="title_activity_text_field">TextFieldActivity</string>
     <string name="title_activity_card">CardActivity</string>
+    <string name="title_activity_customtheme">CustomthemeActivity</string>
 </resources>
