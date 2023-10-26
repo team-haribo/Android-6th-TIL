@@ -3,6 +3,11 @@
 
     <application>
         <activity
+            android:name=".6-minseok-zxing.ZxingActivity"
+            android:exported="false"
+            android:label="@string/title_activity_zxing"
+            android:theme="@style/Theme.Android6thTIL" />
+        <activity
             android:name=".5-minseok-customtheme.CustomthemeActivity"
             android:exported="false"
             android:label="@string/title_activity_customtheme"
