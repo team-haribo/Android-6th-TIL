@@ -1,46 +1,77 @@
 package com.goms.android_6th_til
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.goms.android_6th_til.ui.theme.Android6thTILTheme
+import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.viewinterop.AndroidView
+import com.google.zxing.client.android.BuildConfig
+import com.google.zxing.integration.android.IntentIntegrator
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Android6thTILTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+            RunActivity()
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents != null) {
+                val scannedData = result.contents
+            } else {
+
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
+fun ZxingScanner(
+    onQRCodeScanned: (String) -> Unit
+) {
+    val context = LocalContext.current
+
+    val integrator = IntentIntegrator(context as Activity)
+    integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+    integrator.initiateScan()
+}
+
+@Composable
+fun WebView(url: String) {
+    AndroidView(
+        factory = { context ->
+            WebView(context).apply {
+                settings.javaScriptEnabled = true
+                webViewClient = WebViewClient()
+                loadUrl(url)
+            }
+        }
     )
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    Android6thTILTheme {
-        Greeting("Android")
+fun RunActivity() {
+    var scannedQRCode by remember { mutableStateOf<String?>(null) }
+
+    ZxingScanner { qrCodeContents ->
+        scannedQRCode = qrCodeContents
+    }
+
+    Column {
+        scannedQRCode?.let { qrCodeContents ->
+            WebView(qrCodeContents)
+        }
     }
 }
